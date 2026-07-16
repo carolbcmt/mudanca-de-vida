@@ -2,7 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background-color: #f4f4f4;
+  -webkit-touch-callout: none;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+input, textarea, select {
+  -webkit-touch-callout: default;
+  -webkit-user-select: auto;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
