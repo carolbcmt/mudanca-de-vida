@@ -2,7 +2,10 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
     <title>Mudança de Vida — Cronograma & Evolução</title>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -11,7 +14,7 @@
     <meta name="theme-color" content="#8B7FC7" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Mudança de Vida" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,9 +23,49 @@
       rel="stylesheet"
     />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(135deg, #8B7FC7, #C98AA8);
+        transition: opacity 0.4s ease;
+      }
+      #splash img {
+        width: 96px;
+        height: 96px;
+        border-radius: 22px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+      #splash.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
+    <div id="splash"><img src="/icon-192.png" alt="" /></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const s = document.getElementById("splash");
+          if (s) {
+            s.classList.add("fade-out");
+            setTimeout(() => s.remove(), 450);
+          }
+        }, 350);
+      });
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>
