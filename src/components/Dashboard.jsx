@@ -320,8 +320,17 @@ export default function Dashboard({ session }) {
     );
   }
 
-  return (
-    <div style={{ backgroundColor: T.bg, color: T.text, minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
+return (
+    <div
+      style={{
+        backgroundColor: T.bg,
+        color: T.text,
+        minHeight: "100vh",
+        fontFamily: "'Inter', sans-serif",
+        paddingTop: "env(safe-area-inset-top)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+      }}
+    >
       <div className="max-w-6xl mx-auto px-6 py-10">
         {/* Header */}
         <div className="flex items-start justify-between mb-10 flex-wrap gap-4">
