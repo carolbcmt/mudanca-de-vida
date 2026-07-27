@@ -271,22 +271,21 @@ export default function Dashboard({ session }) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
-
-  const handleConectarGoogle = async () => {
+const handleConectarGoogle = async () => {
     setAvisoAgenda("");
     try {
       await conectarGoogleAgenda();
       setGoogleConectado(true);
+      return true;
     } catch (e) {
       setAvisoAgenda("Não foi possível conectar à Google Agenda. Tente de novo.");
+      return false;
     }
   };
-
   const enviarSemanaParaAgenda = async () => {
-    if (!estaConectado()) {
-      await handleConectarGoogle();
-    }
-    setEnviandoAgenda(true);
+    const conectou = await handleConectarGoogle();
+    if (!conectou) return;
+    setEnviandoAgenda(true);  
     setAvisoAgenda("");
     try {
       let count = 0;
